@@ -1,5 +1,8 @@
 package com.tree;
 
+import java.util.LinkedList;
+import java.util.Queue;
+
 class Node {
     int data;
     Node left;
@@ -40,6 +43,22 @@ public class BinaryTree {
         post_order(root.right);
         System.out.print(root.data + " ");
     }
+    public static void level_order(Node root) {
+    	Queue<Node> q=new LinkedList<>();
+    	q.add(root);
+    	while(!q.isEmpty()) {
+    		Node curr=q.poll();
+    		System.out.print(curr.data+" ");
+    		if(curr.left!=null) {
+    		   q.add(curr.left);
+    		   
+    		}
+    		if(curr.right!= null) {
+    			q.add(curr.right);
+    		}
+    	}
+    	
+    }
 
     public static void main(String[] args) {
         // Creating a binary tree manually
@@ -56,7 +75,8 @@ public class BinaryTree {
         root.right = new Node(3);
         root.left.left = new Node(4);
         root.left.right = new Node(5);
-        root.right.right = new Node(6);
+        root.left.right.left = new Node(6);
+        root.left.left.right= new Node(7);
 
         System.out.println("Pre-order Traversal:");
         pre_order(root);
@@ -68,6 +88,10 @@ public class BinaryTree {
 
         System.out.println("Post-order Traversal:");
         post_order(root);
+        System.out.println();
+        
+        System.out.println("Level-order Traversal:");
+        level_order(root);
         System.out.println();
     }
 }
